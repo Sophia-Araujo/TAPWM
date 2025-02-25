@@ -1,0 +1,9 @@
+MENDES, A. Arquitetura de Software: Desenvolvimento Orientado para Arquitetura. Disponível em: <https://www.devmedia.com.br/arquitetura-de-software-desenvolvimento-orientado-para-arquitetura/8033>. Acesso em: 24 fev. 2025.
+
+‌ ALURA. Padrões arquiteturais: arquitetura de software descomplicada. Disponível em: <https://www.alura.com.br/artigos/padroes-arquiteturais-arquitetura-software-descomplicada?srsltid=AfmBOopTMds_BogMi3WJJ9AdnuNikAlEJ5F57rQaNFHfcb17PjjmIQgE>. Acesso em: 24 fev. 2025.
+
+‌SANTOS. Tipos de Arquitetura no Desenvolvimento de Software. Disponível em: <https://www.softplan.com.br/tech-writers/tipos-de-arquitetura-desenvolvimento-software/>. Acesso em: 24 fev. 2025.
+
+‌MARCELA. Arquitetura de Software em 2023: Tendências e Previsões para o Futuro. Disponível em: <https://awari.com.br/arquitetura-de-software-em-2023-tendencias-e-previsoes-para-o-futuro/>. Acesso em: 24 fev. 2025.
+
+‌
