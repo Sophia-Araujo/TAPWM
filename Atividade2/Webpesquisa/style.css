@@ -1,0 +1,315 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+}
+
+body {
+    background: #fff;
+    color: #333;
+}
+
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 40px;
+    background: #fff;
+    border-bottom: 1px solid #ddd;
+}
+
+.logo {
+    font-size: 24px;
+    font-weight: bold;
+}
+
+.logo span {
+    color: #4CAF50;
+}
+
+nav ul {
+    list-style: none;
+    display: flex;
+    gap: 20px;
+}
+
+nav ul li {
+    display: inline;
+}
+
+nav ul li a {
+    text-decoration: none;
+    color: #333;
+    font-weight: bold;
+    position: relative; /* Para o efeito funcionar */
+    padding: 8px 12px;
+    transition: color 0.3s ease-in-out;
+}
+
+/* Linha verde animada */
+nav ul li a::before {
+    content: "";
+    position: absolute;
+    left: 50%;
+    bottom: -1px; /* Espaço da linha verde */
+    width: 0;
+    height: 3px;
+    background-color: #4CAF50;
+    transition: width 0.3s ease-in-out, left 0.3s ease-in-out;
+}
+
+/* Efeito ao passar o mouse */
+nav ul li a:hover::before {
+    width: 100%;
+    left: 0;
+}
+
+
+
+
+/* Menu responsivo */
+.menu-toggle {
+    display: none;
+    background: none;
+    border: none;
+    font-size: 24px;
+    cursor: pointer;
+}
+
+/* Ajustes para mobile */
+@media (max-width: 768px) {
+    nav ul {
+        display: none;
+        flex-direction: column;
+        position: absolute;
+        top: 60px;
+        right: 20px;
+        background: white;
+        border: 1px solid #ddd;
+        width: 200px;
+        padding: 10px;
+    }
+
+    nav ul.show {
+        display: flex;
+    }
+
+    .menu-toggle {
+        display: block;
+    }
+}
+
+.sobre-nos {
+    display: flex;
+    align-items: center;
+    padding: 50px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.imagem img {
+    width: 1000px;
+}
+
+.texto {
+    max-width: 500px;
+    margin-left: 40px;
+}
+
+.texto h2 {
+    font-size: 28px;
+    font-weight: bold;
+    margin-bottom: 20px;
+}
+
+.destaque2 {
+    color: #4CAF50;
+    font-weight: bold;
+}
+
+.texto p {
+    margin-bottom: 15px;
+    line-height: 1.6;
+}
+
+/* Efeito botão */
+.botao {
+    background: #FFD700;
+    padding: 10px 20px;
+    border: none;
+    font-size: 16px;
+    font-weight: bold;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.botao:hover {
+    background: #FFC107;
+}
+
+
+.impacto {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    max-width: 1200px;
+    margin: 40px auto;
+    gap: 30px;
+    top: 50px;
+}
+
+/* Organizando colunas */
+.coluna {
+    flex: 1;
+}
+
+/* Estilizando o texto */
+.impacto p {
+    font-size: 18px;
+    line-height: 1.6;
+    margin-bottom: 15px;
+}
+
+/* Destacando trechos importantes */
+.destaque {
+    background: #A6DAA5; /* Verde claro */
+    padding: 4px 8px;
+    font-weight: bold;
+    border-radius: 5px;
+}
+
+/* Imagens responsivas */
+.imagem img {
+    width: 100%;
+    border-radius: 10px;
+}
+
+/* Ícone no canto da imagem */
+.icone-canto {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    background: #1E1E1E;
+    color: white;
+    padding: 8px;
+    border-radius: 50%;
+    font-size: 14px;
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+    .impacto {
+        flex-direction: column;
+        text-align: center;
+    }
+    
+    .icone-canto {
+        left: 50%;
+        transform: translateX(-50%);
+    }
+}
+
+
+
+/* Tela 1: Desenvolvimento */
+.desenvolvimento {
+    background: #6BBE7E;
+    color: white;
+    padding: 50px 20px;
+    text-align: center;
+    clip-path: polygon(0% 10%, 100% 0%, 100% 100%, 0% 100%);
+}
+
+.desenvolvimento h1 {
+    font-size: 2.5em;
+    font-weight: bold;
+}
+
+.desenvolvimento p {
+    margin: 15px auto;
+    max-width: 800px;
+    font-size: 1.1em;
+}
+
+.buttons {
+    margin-top: 20px;
+}
+
+.buttons button {
+    background: white;
+    color: black;
+    border: none;
+    padding: 10px 15px;
+    margin: 5px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 1em;
+    transition: 0.3s;
+}
+
+.buttons button:hover {
+    background: #ddd;
+}
+
+/* Tela 2: 2024 EM DIANTE */
+.futuro {
+    text-align: center;
+    padding: 50px 20px;
+}
+
+.futuro h1 {
+    font-size: 2.5em;
+    font-weight: bold;
+    color: #6BBE7E;
+}
+
+.futuro h1 span {
+    font-weight: bold;
+}
+
+.content {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+    flex-wrap: wrap;
+    margin-top: 20px;
+}
+
+.content img {
+    width: 750px;
+    border-radius: 5px;
+}
+
+.text {
+    max-width: 500px;
+    font-size: 1.1em;
+}
+
+.cont {
+    display: grid;
+    grid-template-columns: 1fr 1fr; /* Duas colunas de tamanho igual */
+    gap: 20px;
+}
+.co {
+    padding: 10px;
+    border: 1px solid #ccc;
+}
+.bd{
+    border: 1px solid #ccc;
+}
+
+footer {
+    background-color: #222;
+    color: white;
+    text-align: center;
+    margin-top: 200px;
+    padding: 8px;
+    font-size: 18px;
+    font-family: Arial, sans-serif;
+    font-weight: bold;
+    letter-spacing: 1px;
+    box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.2);
+}
