@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>Funções Interativas</title>
+  <link rel="stylesheet" href="style.css">
+  <script defer src="script.js"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+  <div class="container">
+    <h1>Funções em JavaScript</h1>
+
+    <!-- 1. Maior Número -->
+    <section>
+        <h2>1. Maior de Três Números</h2>
+        <input type="number" id="num1" placeholder="Número 1">
+        <input type="number" id="num2" placeholder="Número 2">
+        <input type="number" id="num3" placeholder="Número 3">
+        <button onclick="maiorNumero()">Calcular Maior</button>
+        <button onclick="limparMaior()">Limpar</button>
+        <p id="res-maior"></p>
+    </section>
+    
+    <!-- 2. Ordem Crescente -->
+    <section>
+        <h2>2. Números em Ordem Crescente</h2>
+        <input type="number" id="ord1" placeholder="Número 1">
+        <input type="number" id="ord2" placeholder="Número 2">
+        <input type="number" id="ord3" placeholder="Número 3">
+        <button onclick="ordenarNumeros()">Ordenar</button>
+        <button onclick="limparOrdem()">Limpar</button>
+        <p id="res-ordem"></p>
+    </section>
+    
+    <!-- 3. Palíndromo -->
+    <section>
+        <h2>3. Verificador de Palíndromo</h2>
+        <input type="text" id="palavra" placeholder="Digite uma palavra ou frase">
+        <button onclick="verificarPalindromo()">Verificar</button>
+        <button onclick="limparPalindromo()">Limpar</button>
+        <p id="res-palindromo"></p>
+    </section>
+    
+    <!-- 4. Subconjunto -->
+    <section>
+        <h2>4. Subconjunto de Palavra</h2>
+        <input type="text" id="palavra1" placeholder="Palavra principal">
+        <input type="text" id="palavra2" placeholder="Subpalavra">
+        <button onclick="verificarSubconjunto()">Verificar</button>
+        <button onclick="limparSubconjunto()">Limpar</button>
+        <p id="res-subconjunto"></p>
+    </section>
+  
+    </section>
+  </div>
+</body>
+</html>
