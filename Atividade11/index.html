@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Banco Digital - Atividade 11</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="script.js" defer></script>
+
+</head>
+<body>
+  <div class="container">
+    <h1>Atividade 11 - Banco</h1>
+
+    <!-- Área do Retângulo -->
+    <h2>Área do Retângulo</h2>
+    <input type="number" id="base" placeholder="Base">
+    <input type="number" id="altura" placeholder="Altura">
+    <button onclick="calcularArea()">Calcular Área</button>
+    <div id="resultadoRetangulo"></div>
+
+    <hr>
+
+    <!-- Conta Bancária -->
+    <h2>Conta</h2>
+    <input type="text" id="nomeC" placeholder="Nome">
+    <input type="text" id="bancoC" placeholder="Banco">
+    <input type="text" id="contaC" placeholder="Conta" oninput="mascaraNumeroConta(this)">
+    <input type="text" id="saldoC" placeholder="Saldo" oninput="mascaraDecimal(this)">
+
+    <h2>Corrente</h2>
+    <input type="text" id="especialC" placeholder="Especial" oninput="mascaraDecimal(this)">
+
+    <h2>Poupança</h2>
+    <input type="text" id="saldoP" placeholder="Saldo Poupança" oninput="mascaraDecimal(this)">
+    <input type="text" id="jurosP" placeholder="Juros (%)" oninput="mascaraDecimal(this)">
+    <input type="text" id="vencimentoP" placeholder="Vencimento (DD/MM/AAAA)" oninput="mascaraData(this)">
+    <button onclick="criar()">Criar Contas</button>
+    <div id="resultado"></div>
+  </div>
+
+
+</body>
+</html>

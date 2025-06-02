@@ -1,0 +1,78 @@
+* {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(to right, #74ebd5, #9face6);
+      height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .container {
+      width: 360px;
+      background-color: #ffffff;
+      border-radius: 16px;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+      padding: 24px 28px;
+      text-align: center;
+    }
+
+    h1 {
+      font-size: 20px;
+      color: #2c3e50;
+      margin-bottom: 16px;
+    }
+
+    h2 {
+      font-size: 16px;
+      color: #34495e;
+      margin-top: 16px;
+      margin-bottom: 8px;
+    }
+
+    input {
+      width: 100%;
+      padding: 8px 10px;
+      margin-bottom: 10px;
+      border-radius: 6px;
+      border: 1px solid #ccc;
+      font-size: 14px;
+    }
+
+    button {
+      width: 100%;
+      padding: 10px;
+      font-size: 14px;
+      background-color: #2980b9;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      margin-top: 8px;
+    }
+
+    button:hover {
+      background-color: #1f618d;
+    }
+
+    #resultadoRetangulo,
+    #resultado {
+      margin-top: 12px;
+      background-color: #ecf0f1;
+      padding: 10px;
+      border-radius: 8px;
+      font-family: monospace;
+      font-size: 13px;
+      text-align: left;
+    }
+
+    hr {
+      border: none;
+      height: 1px;
+      background-color: #ccc;
+      margin: 20px 0;
+    }
