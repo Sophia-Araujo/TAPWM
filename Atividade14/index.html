@@ -1,0 +1,499 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formulário Principal</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #2c5282;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .container {
+            background: #ffffff;
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 20px 40px rgba(44, 82, 130, 0.2);
+            max-width: 500px;
+            width: 100%;
+            animation: slideUp 0.6s ease-out;
+        }
+
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .header h1 {
+            color: #2c5282;
+            font-size: 2.2rem;
+            font-weight: 700;
+            margin-bottom: 8px;
+        }
+
+        .header p {
+            color: #4a5568;
+            font-size: 1rem;
+        }
+
+        .form-group {
+            margin-bottom: 25px;
+        }
+
+        .form-group label {
+            display: block;
+            font-weight: 600;
+            color: #2c5282;
+            margin-bottom: 8px;
+            font-size: 1rem;
+        }
+
+        .form-input {
+            width: 100%;
+            padding: 15px;
+            border: 2px solid #cbd5e0;
+            border-radius: 10px;
+            font-size: 16px;
+            transition: all 0.3s ease;
+            background: #f8fafc;
+            color: #2d3748;
+        }
+
+        .form-input:focus {
+            outline: none;
+            border-color: #4299e1;
+            box-shadow: 0 0 0 3px rgba(66, 153, 225, 0.1);
+            background: white;
+        }
+
+        .form-input.error {
+            border-color: #e53e3e;
+            background: #fed7d7;
+        }
+
+        .form-input.success {
+            border-color: #38a169;
+            background: #c6f6d5;
+        }
+
+        textarea.form-input {
+            resize: vertical;
+            min-height: 100px;
+            font-family: inherit;
+        }
+
+        .radio-group {
+            margin-top: 15px;
+        }
+
+        .radio-question {
+            font-weight: 600;
+            color: #2c5282;
+            margin-bottom: 12px;
+            font-size: 1rem;
+        }
+
+        .radio-options {
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        .radio-option {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            cursor: pointer;
+            padding: 10px 15px;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+        }
+
+        .radio-option:hover {
+            background: #ebf4ff;
+        }
+
+        .radio-option input[type="radio"] {
+            width: 18px;
+            height: 18px;
+            cursor: pointer;
+            accent-color: #4299e1;
+        }
+
+        .radio-option label {
+            cursor: pointer;
+            margin: 0;
+            font-weight: 500;
+            color: #4a5568;
+        }
+
+        .button-group {
+            display: flex;
+            gap: 15px;
+            margin-top: 30px;
+            justify-content: center;
+        }
+
+        .btn {
+            padding: 15px 30px;
+            border: none;
+            border-radius: 10px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            min-width: 120px;
+        }
+
+        .btn-primary {
+            background: #4299e1;
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: #3182ce;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(66, 153, 225, 0.3);
+        }
+
+        .btn-secondary {
+            background: #edf2f7;
+            color: #4a5568;
+            border: 2px solid #cbd5e0;
+        }
+
+        .btn-secondary:hover {
+            background: #e2e8f0;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(160, 174, 192, 0.3);
+        }
+
+        .error-message {
+            color: #e53e3e;
+            font-size: 14px;
+            margin-top: 5px;
+            font-weight: 500;
+            display: none;
+        }
+
+        .success-message {
+            background: #c6f6d5;
+            color: #22543d;
+            padding: 15px;
+            border-radius: 10px;
+            margin-top: 20px;
+            border-left: 4px solid #38a169;
+            display: none;
+            font-weight: 500;
+        }
+
+        .char-counter {
+            font-size: 12px;
+            color: #718096;
+            text-align: right;
+            margin-top: 5px;
+        }
+
+        .char-counter.error {
+            color: #e53e3e;
+        }
+
+        @media (max-width: 600px) {
+            .container {
+                padding: 25px;
+                margin: 10px;
+            }
+            
+            .header h1 {
+                font-size: 1.8rem;
+            }
+            
+            .button-group {
+                flex-direction: column;
+            }
+            
+            .radio-options {
+                flex-direction: column;
+                gap: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>📋 Formulário Principal</h1>
+            <p>Preencha todos os campos obrigatórios</p>
+        </div>
+
+        <form id="mainForm" novalidate>
+            <div class="form-group">
+                <label for="nome">Nome *</label>
+                <input type="text" id="nome" name="nome" class="form-input" placeholder="Digite seu nome completo">
+                <div class="error-message" id="nomeError">Nome deve ter pelo menos 3 caracteres</div>
+            </div>
+
+            <div class="form-group">
+                <label for="email">E-mail *</label>
+                <input type="email" id="email" name="email" class="form-input" placeholder="seu@email.com">
+                <div class="error-message" id="emailError">Digite um e-mail válido</div>
+            </div>
+
+            <div class="form-group">
+                <label for="comentario">Comentário *</label>
+                <textarea id="comentario" name="comentario" class="form-input" placeholder="Digite seu comentário aqui..."></textarea>
+                <div class="char-counter" id="charCounter">0/20 caracteres mínimos</div>
+                <div class="error-message" id="comentarioError">Comentário deve ter pelo menos 20 caracteres</div>
+            </div>
+
+            <div class="form-group">
+                <div class="radio-group">
+                    <div class="radio-question">Pesquisa: Primeira vez nesta página? *</div>
+                    <div class="radio-options">
+                        <div class="radio-option">
+                            <input type="radio" id="sim" name="pesquisa" value="sim">
+                            <label for="sim">Sim</label>
+                        </div>
+                        <div class="radio-option">
+                            <input type="radio" id="nao" name="pesquisa" value="nao">
+                            <label for="nao">Não</label>
+                        </div>
+                    </div>
+                </div>
+                <div class="error-message" id="pesquisaError">Por favor, selecione uma opção</div>
+            </div>
+
+            <div class="button-group">
+                <button type="submit" class="btn btn-primary">Enviar</button>
+                <button type="button" class="btn btn-secondary" id="limparBtn">Limpar</button>
+            </div>
+
+            <div class="success-message" id="successMessage">
+                ✅ Formulário enviado com sucesso!
+            </div>
+        </form>
+    </div>
+
+    <script>
+        const form = document.getElementById('mainForm');
+        const nomeInput = document.getElementById('nome');
+        const emailInput = document.getElementById('email');
+        const comentarioInput = document.getElementById('comentario');
+        const pesquisaInputs = document.querySelectorAll('input[name="pesquisa"]');
+        const limparBtn = document.getElementById('limparBtn');
+        const successMessage = document.getElementById('successMessage');
+        const charCounter = document.getElementById('charCounter');
+
+        // Função para validar o formulário
+        function validarFormulario() {
+            let isValid = true;
+            let erros = [];
+
+            // Validar nome (mínimo 3 caracteres)
+            const nome = nomeInput.value.trim();
+            if (nome.length === 0) {
+                showError('nome', 'nomeError');
+                erros.push('• Nome é obrigatório');
+                isValid = false;
+            } else if (nome.length < 3) {
+                showError('nome', 'nomeError');
+                erros.push('• Nome deve ter pelo menos 3 caracteres');
+                isValid = false;
+            } else {
+                showSuccess('nome', 'nomeError');
+            }
+
+            // Validar email
+            const email = emailInput.value.trim();
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (email.length === 0) {
+                showError('email', 'emailError');
+                erros.push('• E-mail é obrigatório');
+                isValid = false;
+            } else if (!emailRegex.test(email)) {
+                showError('email', 'emailError');
+                erros.push('• E-mail deve ter um formato válido (exemplo@email.com)');
+                isValid = false;
+            } else {
+                showSuccess('email', 'emailError');
+            }
+
+            // Validar comentário (mínimo 20 caracteres)
+            const comentario = comentarioInput.value.trim();
+            if (comentario.length === 0) {
+                showError('comentario', 'comentarioError');
+                erros.push('• Comentário é obrigatório');
+                isValid = false;
+            } else if (comentario.length < 20) {
+                showError('comentario', 'comentarioError');
+                erros.push(`• Comentário deve ter pelo menos 20 caracteres (atual: ${comentario.length})`);
+                isValid = false;
+            } else {
+                showSuccess('comentario', 'comentarioError');
+            }
+
+            // Validar pesquisa (obrigatório)
+            const pesquisaSelecionada = document.querySelector('input[name="pesquisa"]:checked');
+            if (!pesquisaSelecionada) {
+                showError('pesquisa', 'pesquisaError');
+                erros.push('• Você deve responder se é a primeira vez na página');
+                isValid = false;
+            } else {
+                hideError('pesquisaError');
+            }
+
+            // Se houver erros, mostrar mensagem detalhada
+            if (!isValid) {
+                const mensagemErro = `❌ Por favor, corrija os seguintes erros:\n\n${erros.join('\n')}`;
+                alert(mensagemErro);
+            }
+
+            return isValid;
+        }
+
+        function showError(inputId, errorId) {
+            const input = document.getElementById(inputId);
+            const error = document.getElementById(errorId);
+            
+            if (input) {
+                input.classList.add('error');
+                input.classList.remove('success');
+            }
+            if (error) {
+                error.style.display = 'block';
+            }
+        }
+
+        function showSuccess(inputId, errorId) {
+            const input = document.getElementById(inputId);
+            const error = document.getElementById(errorId);
+            
+            if (input) {
+                input.classList.add('success');
+                input.classList.remove('error');
+            }
+            if (error) {
+                error.style.display = 'none';
+            }
+        }
+
+        function hideError(errorId) {
+            const error = document.getElementById(errorId);
+            if (error) {
+                error.style.display = 'none';
+            }
+        }
+
+        // Contador de caracteres para comentário
+        function updateCharCounter() {
+            const length = comentarioInput.value.length;
+            charCounter.textContent = `${length}/20 caracteres mínimos`;
+            
+            if (length >= 20) {
+                charCounter.classList.remove('error');
+                charCounter.style.color = '#38a169';
+            } else {
+                charCounter.classList.add('error');
+            }
+        }
+
+        // Event listeners
+        form.addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            if (validarFormulario()) {
+                const pesquisaSelecionada = document.querySelector('input[name="pesquisa"]:checked');
+                
+                // Primeira mensagem baseada na pesquisa
+                if (pesquisaSelecionada && pesquisaSelecionada.value === 'nao') {
+                    alert('Que bom que você voltou a visitar esta página!');
+                } else {
+                    alert('Volte sempre à esta página!');
+                }
+                
+                // Segunda mensagem de sucesso
+                alert('Enviado com sucesso!');
+                
+                successMessage.style.display = 'block';
+                
+                // Usar document.nomeform.elements[] pelo menos em algum caso
+                console.log('Acessando via document.nomeform.elements[]:', 
+                    document.forms['mainForm'].elements['nome'].value);
+            }
+        });
+
+        limparBtn.addEventListener('click', function() {
+            form.reset();
+            
+            // Limpar classes de erro/sucesso
+            document.querySelectorAll('.form-input').forEach(input => {
+                input.classList.remove('error', 'success');
+            });
+            
+            // Esconder mensagens de erro
+            document.querySelectorAll('.error-message').forEach(error => {
+                error.style.display = 'none';
+            });
+            
+            // Esconder mensagem de sucesso
+            successMessage.style.display = 'none';
+            
+            // Resetar contador
+            updateCharCounter();
+        });
+
+        // Validação em tempo real
+        nomeInput.addEventListener('input', function() {
+            if (this.value.trim().length >= 3) {
+                showSuccess('nome', 'nomeError');
+            }
+        });
+
+        emailInput.addEventListener('input', function() {
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (emailRegex.test(this.value.trim())) {
+                showSuccess('email', 'emailError');
+            }
+        });
+
+        comentarioInput.addEventListener('input', function() {
+            updateCharCounter();
+            if (this.value.trim().length >= 20) {
+                showSuccess('comentario', 'comentarioError');
+            }
+        });
+
+        pesquisaInputs.forEach(input => {
+            input.addEventListener('change', function() {
+                hideError('pesquisaError');
+            });
+        });
+
+        // Inicializar contador
+        updateCharCounter();
+    </script>
+</body>
+</html>
