@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Transformador de Texto</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #1a365d;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .container {
+            background: #ffffff;
+            border-radius: 24px;
+            padding: 50px;
+            box-shadow: 0 25px 50px rgba(26, 54, 93, 0.15);
+            max-width: 650px;
+            width: 100%;
+            animation: slideUp 0.6s ease-out;
+            border: 1px solid #e2e8f0;
+        }
+
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .header h1 {
+            color: #1a365d;
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+
+        .header p {
+            color: #4a5568;
+            font-size: 1.1rem;
+        }
+
+        .form-group {
+            margin-bottom: 25px;
+        }
+
+        .form-group label {
+            display: block;
+            font-weight: 600;
+            color: #1a365d;
+            margin-bottom: 10px;
+            font-size: 1.1rem;
+        }
+
+        .input-text {
+            width: 100%;
+            padding: 18px;
+            border: 2px solid #cbd5e0;
+            border-radius: 12px;
+            font-size: 16px;
+            transition: all 0.3s ease;
+            background: #f7fafc;
+            color: #2d3748;
+        }
+
+        .input-text:focus {
+            outline: none;
+            border-color: #3182ce;
+            box-shadow: 0 0 0 3px rgba(49, 130, 206, 0.1);
+            background: white;
+        }
+
+        .radio-group {
+            display: flex;
+            gap: 20px;
+            margin-bottom: 25px;
+            flex-wrap: wrap;
+        }
+
+        .radio-option {
+            position: relative;
+            cursor: pointer;
+            flex: 1;
+            min-width: 200px;
+        }
+
+        .radio-option input[type="radio"] {
+            position: absolute;
+            opacity: 0;
+            cursor: pointer;
+        }
+
+        .radio-label {
+            display: block;
+            padding: 24px;
+            background: #f8fafc;
+            border: 2px solid #cbd5e0;
+            border-radius: 16px;
+            text-align: center;
+            transition: all 0.3s ease;
+            font-weight: 500;
+            color: #2d3748;
+        }
+
+        .radio-option:hover .radio-label {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 30px rgba(49, 130, 206, 0.15);
+            border-color: #90cdf4;
+        }
+
+        .radio-option input[type="radio"]:checked + .radio-label {
+            background: #3182ce;
+            color: white;
+            border-color: #3182ce;
+            box-shadow: 0 12px 30px rgba(49, 130, 206, 0.3);
+            transform: translateY(-3px);
+        }
+
+        .result-section {
+            margin-top: 35px;
+            padding: 25px;
+            background: #f0f4f8;
+            border-radius: 16px;
+            border-left: 5px solid #3182ce;
+            border: 1px solid #cbd5e0;
+        }
+
+        .result-label {
+            font-weight: 600;
+            color: #1a365d;
+            margin-bottom: 12px;
+            font-size: 1.1rem;
+        }
+
+        .result-text {
+            padding: 18px;
+            background: white;
+            border-radius: 12px;
+            min-height: 65px;
+            font-size: 16px;
+            color: #2d3748;
+            border: 1px solid #cbd5e0;
+            word-break: break-word;
+            font-weight: 500;
+        }
+
+        .icon {
+            display: inline-block;
+            margin-right: 8px;
+            font-size: 1.2em;
+        }
+
+        @media (max-width: 600px) {
+            .container {
+                padding: 30px;
+                margin: 10px;
+            }
+            
+            .header h1 {
+                font-size: 2rem;
+            }
+            
+            .radio-group {
+                flex-direction: column;
+            }
+            
+            .radio-option {
+                min-width: auto;
+            }
+            
+            .radio-label {
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🔤 Transformador de Texto</h1>
+            <p>Digite um texto e escolha como transformá-lo</p>
+        </div>
+
+        <div class="form-group">
+            <label for="inputText">
+                <span class="icon">✏️</span>Digite seu texto:
+            </label>
+            <input type="text" id="inputText" class="input-text" placeholder="Digite aqui o texto que deseja transformar...">
+        </div>
+
+        <div class="radio-group">
+            <div class="radio-option">
+                <input type="radio" id="uppercase" name="transform" value="uppercase">
+                <label for="uppercase" class="radio-label">
+                    <span class="icon">🔠</span>
+                    <strong>MAIÚSCULAS</strong><br>
+                    <small>Transforma em letras maiúsculas</small>
+                </label>
+            </div>
+
+            <div class="radio-option">
+                <input type="radio" id="lowercase" name="transform" value="lowercase">
+                <label for="lowercase" class="radio-label">
+                    <span class="icon">🔡</span>
+                    <strong>minúsculas</strong><br>
+                    <small>Transforma em letras minúsculas</small>
+                </label>
+            </div>
+        </div>
+
+        <div class="result-section">
+            <div class="result-label">
+                <span class="icon">✨</span>Resultado:
+            </div>
+            <div class="result-text" id="result">
+                Selecione uma opção e digite um texto para ver o resultado...
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const inputText = document.getElementById('inputText');
+        const radioButtons = document.querySelectorAll('input[name="transform"]');
+        const result = document.getElementById('result');
+
+        function updateResult() {
+            const text = inputText.value;
+            const selectedTransform = document.querySelector('input[name="transform"]:checked');
+            
+            if (!text) {
+                result.textContent = 'Digite um texto para ver o resultado...';
+                return;
+            }
+            
+            if (!selectedTransform) {
+                result.textContent = 'Selecione uma opção de transformação...';
+                return;
+            }
+            
+            switch (selectedTransform.value) {
+                case 'uppercase':
+                    result.textContent = text.toUpperCase();
+                    break;
+                case 'lowercase':
+                    result.textContent = text.toLowerCase();
+                    break;
+                default:
+                    result.textContent = text;
+            }
+        }
+
+        // Adicionar event listeners
+        inputText.addEventListener('input', updateResult);
+        radioButtons.forEach(radio => {
+            radio.addEventListener('change', updateResult);
+        });
+
+        // Animação suave no input quando focado
+        inputText.addEventListener('focus', function() {
+            this.style.transform = 'scale(1.02)';
+        });
+
+        inputText.addEventListener('blur', function() {
+            this.style.transform = 'scale(1)';
+        });
+    </script>
+</body>
+</html>
