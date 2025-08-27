@@ -1,0 +1,730 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cursos - Fatec Sorocaba</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .container {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            border-radius: 24px;
+            padding: 40px;
+            box-shadow: 
+                0 25px 50px rgba(0, 0, 0, 0.15),
+                0 0 0 1px rgba(255, 255, 255, 0.3) inset;
+            max-width: 600px;
+            width: 100%;
+            transition: all 0.3s ease;
+        }
+
+        .container:hover {
+            transform: translateY(-5px);
+            box-shadow: 
+                0 35px 70px rgba(0, 0, 0, 0.2),
+                0 0 0 1px rgba(255, 255, 255, 0.3) inset;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .logo {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            border-radius: 20px;
+            margin: 0 auto 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 36px;
+            font-weight: 700;
+            color: white;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+        }
+
+        h1 {
+            color: #2d3748;
+            font-size: 32px;
+            font-weight: 700;
+            margin-bottom: 8px;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .subtitle {
+            color: #718096;
+            font-size: 16px;
+            font-weight: 400;
+        }
+
+        .form-group {
+            margin-bottom: 30px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 12px;
+            font-weight: 600;
+            color: #4a5568;
+            font-size: 16px;
+        }
+
+        select {
+            width: 100%;
+            padding: 16px 20px;
+            font-size: 16px;
+            font-weight: 500;
+            color: #2d3748;
+            background: white;
+            border: 2px solid #e2e8f0;
+            border-radius: 16px;
+            outline: none;
+            transition: all 0.3s ease;
+            appearance: none;
+            background-image: 
+                linear-gradient(45deg, transparent 50%, #667eea 50%),
+                linear-gradient(135deg, #667eea 50%, transparent 50%);
+            background-position: 
+                calc(100% - 20px) calc(1em + 2px),
+                calc(100% - 15px) calc(1em + 2px);
+            background-size: 5px 5px, 5px 5px;
+            background-repeat: no-repeat;
+            cursor: pointer;
+        }
+
+        select:hover {
+            border-color: #667eea;
+            transform: translateY(-1px);
+            box-shadow: 0 10px 25px rgba(102, 126, 234, 0.15);
+        }
+
+        select:focus {
+            border-color: #667eea;
+            box-shadow: 
+                0 0 0 4px rgba(102, 126, 234, 0.1),
+                0 10px 25px rgba(102, 126, 234, 0.15);
+        }
+
+        select option {
+            padding: 12px;
+            font-weight: 500;
+        }
+
+        .course-window {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) scale(0.8);
+            width: 800px;
+            height: 600px;
+            max-height: 90vh;
+            background: linear-gradient(135deg, #f7fafc 0%, #edf2f7 100%);
+            border-radius: 24px;
+            padding: 40px;
+            box-shadow: 
+                0 50px 100px rgba(0, 0, 0, 0.3),
+                0 0 0 1px rgba(255, 255, 255, 0.5) inset;
+            z-index: 1000;
+            opacity: 0;
+            transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            overflow-y: auto;
+        }
+
+        .course-window.show {
+            display: block;
+            opacity: 1;
+            transform: translate(-50%, -50%) scale(1);
+        }
+
+        .course-window-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+            padding-bottom: 20px;
+            border-bottom: 2px solid #e2e8f0;
+        }
+
+        .course-title {
+            font-size: 24px;
+            font-weight: 700;
+            color: #2d3748;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .close-btn {
+            width: 40px;
+            height: 40px;
+            border: none;
+            background: #ef4444;
+            color: white;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 18px;
+            font-weight: 700;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .close-btn:hover {
+            background: #dc2626;
+            transform: scale(1.1);
+        }
+
+        .course-description {
+            color: #4a5568;
+            font-size: 16px;
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+
+        .course-details {
+            display: grid;
+            gap: 25px;
+            margin-top: 20px;
+        }
+
+        .info-section {
+            background: rgba(255, 255, 255, 0.8);
+            padding: 20px;
+            border-radius: 16px;
+            border-left: 4px solid #667eea;
+        }
+
+        .info-title {
+            font-size: 18px;
+            font-weight: 700;
+            color: #2d3748;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .info-icon {
+            width: 24px;
+            height: 24px;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 12px;
+            font-weight: 700;
+        }
+
+        .subjects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 10px;
+            margin-top: 10px;
+        }
+
+        .subject-tag {
+            background: rgba(102, 126, 234, 0.1);
+            color: #667eea;
+            padding: 8px 12px;
+            border-radius: 20px;
+            font-size: 13px;
+            font-weight: 600;
+            text-align: center;
+            transition: all 0.2s ease;
+        }
+
+        .subject-tag:hover {
+            background: rgba(102, 126, 234, 0.2);
+            transform: translateY(-1px);
+        }
+
+        .areas-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 10px;
+            margin-top: 10px;
+        }
+
+        .area-tag {
+            background: rgba(118, 75, 162, 0.1);
+            color: #764ba2;
+            padding: 8px 12px;
+            border-radius: 20px;
+            font-size: 13px;
+            font-weight: 600;
+            text-align: center;
+            transition: all 0.2s ease;
+        }
+
+        .area-tag:hover {
+            background: rgba(118, 75, 162, 0.2);
+            transform: translateY(-1px);
+        }
+
+        .course-info {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: rgba(255, 255, 255, 0.6);
+            padding: 15px 20px;
+            border-radius: 12px;
+            margin-top: 10px;
+        }
+
+        .info-item {
+            text-align: center;
+        }
+
+        .info-label {
+            font-size: 12px;
+            color: #718096;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .info-value {
+            font-size: 14px;
+            color: #2d3748;
+            font-weight: 700;
+            margin-top: 2px;
+        }
+
+        .overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.6);
+            backdrop-filter: blur(5px);
+            z-index: 999;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .overlay.show {
+            display: block;
+            opacity: 1;
+        }
+
+        .confirmation-dialog {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) scale(0.9);
+            background: white;
+            padding: 30px;
+            border-radius: 20px;
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.25);
+            z-index: 1001;
+            max-width: 400px;
+            width: 90%;
+            text-align: center;
+            opacity: 0;
+            transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+
+        .confirmation-dialog.show {
+            display: block;
+            opacity: 1;
+            transform: translate(-50%, -50%) scale(1);
+        }
+
+        .confirmation-title {
+            font-size: 20px;
+            font-weight: 700;
+            color: #2d3748;
+            margin-bottom: 15px;
+        }
+
+        .confirmation-message {
+            color: #718096;
+            margin-bottom: 25px;
+            font-size: 14px;
+        }
+
+        .button-group {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+        }
+
+        .btn {
+            padding: 12px 24px;
+            border: none;
+            border-radius: 12px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 14px;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(102, 126, 234, 0.3);
+        }
+
+        .btn-secondary {
+            background: #f7fafc;
+            color: #4a5568;
+            border: 2px solid #e2e8f0;
+        }
+
+        .btn-secondary:hover {
+            background: #edf2f7;
+            transform: translateY(-1px);
+        }
+
+        @media (max-width: 768px) {
+            .course-window {
+                width: 90%;
+                height: auto;
+                max-height: 80vh;
+                overflow-y: auto;
+            }
+            
+            .container {
+                padding: 30px 20px;
+            }
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+
+        .pulse {
+            animation: pulse 0.3s ease-in-out;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <div class="logo">F</div>
+            <h1>Fatec Sorocaba</h1>
+            <p class="subtitle">Escolha seu curso ideal</p>
+        </div>
+
+        <div class="form-group">
+            <label for="courseSelect">Selecione um curso:</label>
+            <select id="courseSelect">
+                <option value="">-- Escolha um curso --</option>
+                <option value="ads">Análise e Desenvolvimento de Sistemas</option>
+                <option value="gestao-ti">Gestão da Tecnologia da Informação</option>
+                <option value="logistica">Logística</option>
+                <option value="fabricacao-mecanica">Fabricação Mecânica</option>
+                <option value="processos-quimicos">Processos Químicos</option>
+                <option value="gestao-empresarial">Gestão Empresarial</option>
+                <option value="marketing">Marketing</option>
+                <option value="comercio-exterior">Comércio Exterior</option>
+            </select>
+        </div>
+    </div>
+
+    <!-- Overlay -->
+    <div class="overlay" id="overlay"></div>
+
+    <!-- Diálogo de Confirmação -->
+    <div class="confirmation-dialog" id="confirmationDialog">
+        <div class="confirmation-title">Confirmar Seleção</div>
+        <div class="confirmation-message">
+            Deseja realmente abrir a janela com informações sobre o curso <strong id="selectedCourseName"></strong>?
+        </div>
+        <div class="button-group">
+            <button class="btn btn-primary" id="confirmBtn">Sim, abrir</button>
+            <button class="btn btn-secondary" id="cancelBtn">Cancelar</button>
+        </div>
+    </div>
+
+    <!-- Janela do Curso -->
+    <div class="course-window" id="courseWindow">
+        <div class="course-window-header">
+            <h2 class="course-title" id="courseTitle">Título do Curso</h2>
+            <button class="close-btn" id="closeBtn">×</button>
+        </div>
+        <div class="course-description" id="courseDescription">
+            Descrição do curso...
+        </div>
+        <div class="course-details" id="courseDetails">
+            <div class="info-section">
+                <div class="info-title">
+                    <div class="info-icon">📚</div>
+                    Principais Disciplinas
+                </div>
+                <div class="subjects-grid" id="subjectsGrid">
+                    <!-- Matérias serão inseridas aqui -->
+                </div>
+            </div>
+            
+            <div class="info-section">
+                <div class="info-title">
+                    <div class="info-icon">💼</div>
+                    Áreas de Atuação
+                </div>
+                <div class="areas-grid" id="areasGrid">
+                    <!-- Áreas serão inseridas aqui -->
+                </div>
+            </div>
+            
+            <div class="info-section">
+                <div class="info-title">
+                    <div class="info-icon">ℹ️</div>
+                    Informações do Curso
+                </div>
+                <div class="course-info" id="courseInfo">
+                    <div class="info-item">
+                        <div class="info-label">Duração</div>
+                        <div class="info-value" id="courseDuration">3 anos</div>
+                    </div>
+                    <div class="info-item">
+                        <div class="info-label">Período</div>
+                        <div class="info-value" id="coursePeriod">Noturno</div>
+                    </div>
+                    <div class="info-item">
+                        <div class="info-label">Modalidade</div>
+                        <div class="info-value" id="courseModality">Presencial</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const courseSelect = document.getElementById('courseSelect');
+        const overlay = document.getElementById('overlay');
+        const confirmationDialog = document.getElementById('confirmationDialog');
+        const courseWindow = document.getElementById('courseWindow');
+        const selectedCourseName = document.getElementById('selectedCourseName');
+        const confirmBtn = document.getElementById('confirmBtn');
+        const cancelBtn = document.getElementById('cancelBtn');
+        const closeBtn = document.getElementById('closeBtn');
+        const courseTitle = document.getElementById('courseTitle');
+        const courseDescription = document.getElementById('courseDescription');
+        const courseDetails = document.getElementById('courseDetails');
+
+        const courseData = {
+            'ads': {
+                title: 'Análise e Desenvolvimento de Sistemas',
+                description: 'Curso focado no desenvolvimento de software, programação e análise de sistemas computacionais.',
+                subjects: ['Algoritmos e Programação', 'Banco de Dados', 'Engenharia de Software', 'Programação Web', 'Estruturas de Dados', 'Sistemas Operacionais', 'Redes de Computadores', 'Programação Orientada a Objetos'],
+                areas: ['Desenvolvedor Full Stack', 'Analista de Sistemas', 'Arquiteto de Software', 'DevOps Engineer', 'Analista de Dados', 'Product Owner', 'Scrum Master', 'Consultor em TI'],
+                duration: '3 anos',
+                period: 'Noturno',
+                modality: 'Presencial'
+            },
+            'gestao-ti': {
+                title: 'Gestão da Tecnologia da Informação',
+                description: 'Formação voltada para gestão de projetos de TI, infraestrutura e governança corporativa.',
+                subjects: ['Gestão de Projetos', 'Governança de TI', 'Segurança da Informação', 'Infraestrutura de TI', 'ITIL', 'Business Intelligence', 'Gestão de Processos', 'Auditoria em TI'],
+                areas: ['Gerente de TI', 'Consultor em Governança', 'Analista de Segurança', 'Gerente de Projetos', 'Auditor de TI', 'Especialista em ITIL', 'CTO/CIO', 'Consultor em Transformação Digital'],
+                duration: '3 anos',
+                period: 'Noturno',
+                modality: 'Presencial'
+            },
+            'logistica': {
+                title: 'Logística',
+                description: 'Curso que prepara profissionais para gerenciar cadeias de suprimentos e operações logísticas.',
+                subjects: ['Gestão da Cadeia de Suprimentos', 'Transportes e Distribuição', 'Armazenagem', 'Logística Internacional', 'Custos Logísticos', 'Planejamento e Controle', 'E-commerce', 'Sustentabilidade Logística'],
+                areas: ['Analista de Logística', 'Coordenador de Suprimentos', 'Gerente de Distribuição', 'Analista de Transportes', 'Consultor Logístico', 'Supervisor de Armazém', 'Especialista em Comércio Exterior', 'Analista de Custos Logísticos'],
+                duration: '3 anos',
+                period: 'Noturno',
+                modality: 'Presencial'
+            },
+            'fabricacao-mecanica': {
+                title: 'Fabricação Mecânica',
+                description: 'Formação em processos industriais, manufatura e tecnologias de produção mecânica.',
+                subjects: ['Processos de Fabricação', 'Usinagem CNC', 'Metrologia Industrial', 'Materiais e Tratamentos', 'Automação Industrial', 'Controle de Qualidade', 'Soldagem', 'Desenho Técnico Mecânico'],
+                areas: ['Engenheiro de Produção', 'Supervisor de Manufatura', 'Programador CNC', 'Inspetor de Qualidade', 'Técnico em Automação', 'Consultor Industrial', 'Coordenador de Manutenção', 'Especialista em Lean Manufacturing'],
+                duration: '3 anos',
+                period: 'Noturno',
+                modality: 'Presencial'
+            },
+            'processos-quimicos': {
+                title: 'Processos Químicos',
+                description: 'Curso voltado para a indústria química, petroquímica e de processos industriais.',
+                subjects: ['Química Orgânica e Inorgânica', 'Operações Unitárias', 'Controle de Processos', 'Química Analítica', 'Termodinâmica', 'Segurança Industrial', 'Meio Ambiente', 'Instrumentação'],
+                areas: ['Técnico em Processos Químicos', 'Analista de Laboratório', 'Supervisor de Produção', 'Especialista em Segurança', 'Consultor Ambiental', 'Operador de Refinaria', 'Controlista de Qualidade', 'Técnico em Petroquímica'],
+                duration: '3 anos',
+                period: 'Noturno',
+                modality: 'Presencial'
+            },
+            'gestao-empresarial': {
+                title: 'Gestão Empresarial',
+                description: 'Formação em administração, empreendedorismo e gestão de negócios.',
+                subjects: ['Administração Geral', 'Gestão Financeira', 'Marketing Estratégico', 'Gestão de Pessoas', 'Empreendedorismo', 'Planejamento Estratégico', 'Gestão de Operações', 'Direito Empresarial'],
+                areas: ['Administrador', 'Gerente Geral', 'Consultor Empresarial', 'Empreendedor', 'Analista Financeiro', 'Coordenador de RH', 'Supervisor Administrativo', 'Business Partner'],
+                duration: '3 anos',
+                period: 'Noturno',
+                modality: 'Presencial'
+            },
+            'marketing': {
+                title: 'Marketing',
+                description: 'Curso focado em estratégias de marketing, comunicação e gestão de marcas.',
+                subjects: ['Marketing Digital', 'Comportamento do Consumidor', 'Pesquisa de Mercado', 'Comunicação Integrada', 'Branding', 'E-commerce', 'Mídias Sociais', 'Marketing de Relacionamento'],
+                areas: ['Analista de Marketing', 'Especialista em Marketing Digital', 'Social Media Manager', 'Brand Manager', 'Consultor em Comunicação', 'Coordenador de E-commerce', 'Analista de CRM', 'Gerente de Produto'],
+                duration: '3 anos',
+                period: 'Noturno',
+                modality: 'Presencial'
+            },
+            'comercio-exterior': {
+                title: 'Comércio Exterior',
+                description: 'Formação em negócios internacionais, importação, exportação e relações comerciais globais.',
+                subjects: ['Legislação Aduaneira', 'Logística Internacional', 'Câmbio e Financiamentos', 'Classificação Fiscal', 'Drawback', 'Acordos Comerciais', 'Marketing Internacional', 'Cultura e Negociação'],
+                areas: ['Analista de Comércio Exterior', 'Despachante Aduaneiro', 'Trader Internacional', 'Consultor em Exportação', 'Coordenador de Importação', 'Especialista em Câmbio', 'Analista de Trade Finance', 'Gerente de Negócios Internacionais'],
+                duration: '3 anos',
+                period: 'Noturno',
+                modality: 'Presencial'
+            }
+        };
+
+        let selectedCourse = '';
+
+        // Evento onchange do select
+        courseSelect.addEventListener('change', function() {
+            const value = this.value;
+            
+            if (value && courseData[value]) {
+                selectedCourse = value;
+                selectedCourseName.textContent = courseData[value].title;
+                
+                // Adiciona animação ao container
+                document.querySelector('.container').classList.add('pulse');
+                setTimeout(() => {
+                    document.querySelector('.container').classList.remove('pulse');
+                }, 300);
+
+                // Mostra o diálogo de confirmação
+                showConfirmationDialog();
+            }
+        });
+
+        function showConfirmationDialog() {
+            overlay.classList.add('show');
+            confirmationDialog.classList.add('show');
+        }
+
+        function hideConfirmationDialog() {
+            overlay.classList.remove('show');
+            confirmationDialog.classList.remove('show');
+        }
+
+        function showCourseWindow() {
+            const course = courseData[selectedCourse];
+            
+            // Preenche as informações básicas
+            courseTitle.textContent = course.title;
+            courseDescription.textContent = course.description;
+            
+            // Preenche as matérias
+            const subjectsGrid = document.getElementById('subjectsGrid');
+            subjectsGrid.innerHTML = '';
+            course.subjects.forEach(subject => {
+                const tag = document.createElement('div');
+                tag.className = 'subject-tag';
+                tag.textContent = subject;
+                subjectsGrid.appendChild(tag);
+            });
+            
+            // Preenche as áreas de atuação
+            const areasGrid = document.getElementById('areasGrid');
+            areasGrid.innerHTML = '';
+            course.areas.forEach(area => {
+                const tag = document.createElement('div');
+                tag.className = 'area-tag';
+                tag.textContent = area;
+                areasGrid.appendChild(tag);
+            });
+            
+            // Preenche as informações do curso
+            document.getElementById('courseDuration').textContent = course.duration;
+            document.getElementById('coursePeriod').textContent = course.period;
+            document.getElementById('courseModality').textContent = course.modality;
+            
+            overlay.classList.add('show');
+            courseWindow.classList.add('show');
+        }
+
+        function hideCourseWindow() {
+            overlay.classList.remove('show');
+            courseWindow.classList.remove('show');
+        }
+
+        // Event listeners
+        confirmBtn.addEventListener('click', function() {
+            hideConfirmationDialog();
+            setTimeout(() => {
+                showCourseWindow();
+            }, 300);
+        });
+
+        cancelBtn.addEventListener('click', function() {
+            hideConfirmationDialog();
+            courseSelect.value = '';
+            selectedCourse = '';
+        });
+
+        closeBtn.addEventListener('click', hideCourseWindow);
+
+        overlay.addEventListener('click', function() {
+            if (confirmationDialog.classList.contains('show')) {
+                hideConfirmationDialog();
+                courseSelect.value = '';
+                selectedCourse = '';
+            } else if (courseWindow.classList.contains('show')) {
+                hideCourseWindow();
+            }
+        });
+
+        // Fechar com ESC
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                if (confirmationDialog.classList.contains('show')) {
+                    hideConfirmationDialog();
+                    courseSelect.value = '';
+                    selectedCourse = '';
+                } else if (courseWindow.classList.contains('show')) {
+                    hideCourseWindow();
+                }
+            }
+        });
+    </script>
+</body>
+</html>
